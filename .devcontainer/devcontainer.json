@@ -1,0 +1,24 @@
+{
+  "name": "Swift 5.9",
+  "image": "swift:5.9-jammy",
+  // Install SwiftFormat
+  "postStartCommand": "git clone https://github.com/MahdiBM/swift-format-repo.git ~/swift-format-repo && . ~/swift-format-repo/install/swift-format-install.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "sswg.swift-lang", // Swift
+        "vknabel.vscode-swiftformat", // SwiftFormat
+        "esbenp.prettier-vscode", // Prettier
+        "usernamehw.errorlens", // Error Lens
+        "GitHub.copilot", // GitHub Copilot
+        "github.vscode-github-actions", // GitHub Actions
+        "GitHub.vscode-pull-request-github", // GitHub PR / Issues
+        "eamodio.gitlens", // GitLens (from GitKraken)
+        "redhat.vscode-yaml" // YAML
+      ],
+      "settings": {
+        "lldb.library": "/usr/lib/liblldb.so" // LLDB
+      }
+    }
+  }
+}

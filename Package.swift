@@ -1,8 +1,8 @@
 // swift-tools-version: 5.9
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-import PackageDescription
 import CompilerPluginSupport
+import PackageDescription
 
 let featureFlags: [SwiftSetting] = [
     /// `-enable-upcoming-feature` flags will get removed in the future
@@ -14,11 +14,11 @@ let featureFlags: [SwiftSetting] = [
 
     /// https://github.com/apple/swift-evolution/blob/main/proposals/0274-magic-file.md
     /// Nicer `#file`.
-        .enableUpcomingFeature("ConciseMagicFile"),
+    .enableUpcomingFeature("ConciseMagicFile"),
 
     /// https://github.com/apple/swift-evolution/blob/main/proposals/0286-forward-scan-trailing-closures.md
     /// This one shouldn't do much to be honest, but shouldn't hurt as well.
-        .enableUpcomingFeature("ForwardTrailingClosures"),
+    .enableUpcomingFeature("ForwardTrailingClosures"),
 
     /// https://github.com/apple/swift-evolution/blob/main/proposals/0354-regex-literals.md
     /// `BareSlashRegexLiterals` not enabled since we don't use regex anywhere.
@@ -39,7 +39,7 @@ let swiftSettings = featureFlags + experimentalFeatureFlags
 let package = Package(
     name: "repor-macro-codable-crash",
     platforms: [
-        .macOS(.v14)
+        .macOS(.v14),
     ],
     products: [
         // Products define the executables and libraries a package produces, making them visible to other packages.
@@ -49,7 +49,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-syntax", from: "509.0.0")
+        .package(url: "https://github.com/apple/swift-syntax", from: "509.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -70,7 +70,12 @@ let package = Package(
         ),
         .testTarget(
             name: "repor-macro-codable-crashTests",
-            dependencies: [.target(name: "repor-macro-codable-crash")],
+            dependencies: [
+                .target(name: "repor-macro-codable-crash"),
+                .target(name: "UnstableEnumMacro"),
+                .product(name: "SwiftSyntaxMacros", package: "swift-syntax"),
+                .product(name: "SwiftCompilerPlugin", package: "swift-syntax"),
+            ],
             swiftSettings: swiftSettings
         ),
     ]
