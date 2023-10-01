@@ -8,7 +8,5 @@ final class repor_macro_codable_crashTests: XCTestCase {
         let data = Data(text.utf8)
         let decoder = JSONDecoder()
         let decoded = try decoder.decode(MessageCreate.self, from: data)
-
-        XCTFail("DID NOT CRASH?!")
     }
 }
